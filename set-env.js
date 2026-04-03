@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const targetPath = './src/environments/environment.ts';
+const targetPath = './src/environment/environment.ts';
 
 console.log('--- INICIANDO INYECCIÓN DE VARIABLES ---');
 console.log('¿API_URL detectada en el servidor?:', process.env.API_URL ? '✅ SÍ' : '❌ NO (Usando localhost)');
