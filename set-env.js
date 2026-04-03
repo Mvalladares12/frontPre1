@@ -2,8 +2,11 @@ const fs = require('fs');
 
 const targetPath = './src/environments/environment.ts';
 
-// Usamos el estándar MAYÚSCULAS para leer del servidor
-// Y le ponemos valores por defecto lógicos para tu entorno local
+console.log('--- INICIANDO INYECCIÓN DE VARIABLES ---');
+console.log('¿API_URL detectada en el servidor?:', process.env.API_URL ? '✅ SÍ' : '❌ NO (Usando localhost)');
+console.log('¿KEYCLOAK_URL detectada en el servidor?:', process.env.KEYCLOAK_URL ? '✅ SÍ' : '❌ NO');
+
+
 const apiUrl = process.env.API_URL || 'http://localhost:8084';
 const keycloakUrl = process.env.KEYCLOAK_URL || 'http://localhost:8180';
 const keycloakRealm = process.env.KEYCLOAK_REALM || 'seguridad-app';
@@ -20,3 +23,4 @@ export const environment = {
 `;
 
 fs.writeFileSync(targetPath, envConfigFile);
+console.log('--- environment.ts SOBREESCRITO CON ÉXITO ---');
