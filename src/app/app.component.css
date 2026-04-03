@@ -1,0 +1,22 @@
+/* app.component.css */
+.app-container {
+  display: flex; /* Crea el contexto flex secuencial */
+  flex-direction: row; /* Alinea sidebar y contenido secuencialmente en fila */
+  min-height: 100vh; /* Asegura que el contenedor ocupe toda la altura secuencial */
+  overflow: hidden; /* Evita scrolls dobles extraños */
+}
+
+app-sidebar {
+  /* No le pongas position fixed ni absolute aquí */
+  flex: 0 0 260px; /* Ancho fijo secuencial de 260px, no crece ni encoge */
+  /* Si quieres que la sidebar tenga su propio scroll secuencial: */
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.main-content {
+  flex: 1; /* Ocupa todo el espacio secuencial restante a la derecha */
+  height: 100vh; /* Altura completa secuencial */
+  overflow-y: auto; /* IMPORTANTE: El scroll secuencial ocurre aquí, no en el body */
+  background-color: #f1f5f9; /* Color de fondo secuencial para el contenido */
+}

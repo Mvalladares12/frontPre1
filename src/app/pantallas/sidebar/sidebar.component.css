@@ -1,0 +1,90 @@
+/* sidebar.component.css */
+
+.sidebar-container {
+  width: 100%; /* Ocupa el 100% del ancho secuencial que le dio el padre (260px) */
+  height: 100%; /* Ocupa el 100% de la altura secuencial del padre */
+  background-color: #1e293b;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 24px 20px;
+  background-color: #0f172a; /* Un tono ligeramente más oscuro para resaltar */
+  text-align: center;
+  border-bottom: 1px solid #334155;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* --- Navegación --- */
+.sidebar-nav {
+  flex-grow: 1; /* MAGIA: Esto hace que el nav ocupe todo el espacio sobrante, empujando el footer hacia abajo */
+  padding: 20px 0;
+  overflow-y: auto; /* Agrega scroll interno solo si hay demasiados menús */
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 4px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 12px 24px;
+  color: #cbd5e1; /* Texto gris claro */
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+  border-left: 4px solid transparent; /* Preparando el borde para el efecto hover/activo */
+}
+
+/* Efecto al pasar el mouse */
+.sidebar-nav a:hover {
+  background-color: #334155;
+  color: #ffffff;
+  border-left: 4px solid #3b82f6; /* Borde azul a la izquierda */
+}
+
+/* Estilo que Angular aplicará automáticamente con routerLinkActive */
+.sidebar-nav a.active {
+  background-color: #334155;
+  color: #ffffff;
+  border-left: 4px solid #3b82f6;
+  font-weight: 600;
+}
+
+/* --- Footer y Botón --- */
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid #334155;
+  background-color: #1e293b;
+}
+
+.btn-logout {
+  width: 100%;
+  padding: 12px;
+  background-color: #ef4444; /* Rojo alerta */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #dc2626; /* Rojo más oscuro al pasar el mouse */
+}

@@ -1,0 +1,23 @@
+<aside class="sidebar-container">
+  <div class="sidebar-header">
+    <h3>Mi Aplicación</h3>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul>
+      <li>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Pantalla Principal</a>
+      </li>
+
+      @if (hasMunicipioRole) {
+        <li>
+          <a routerLink="/municipio" routerLinkActive="active">Municipio</a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+  </div>
+</aside>
