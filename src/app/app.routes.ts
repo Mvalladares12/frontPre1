@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import {authGuard} from "./core/guards/auth.guard";
+import {departamentoGuard} from "./core/guards/departamento.guard";
 
 export const routes: Routes = [
   {
@@ -11,5 +12,10 @@ export const routes: Routes = [
     path: 'municipio',
     canActivate: [authGuard],
     loadComponent: () => import('./pantallas/principal/principal.component').then(m => m.PrincipalComponent),
+  },
+  {
+    path: 'departamento',
+    canActivate: [departamentoGuard],
+    loadComponent: () => import('./pantallas/departamento/departamento.component').then(m => m.DepartamentoComponent),
   },
 ];

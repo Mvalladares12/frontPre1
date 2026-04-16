@@ -14,6 +14,12 @@
           <a routerLink="/municipio" routerLinkActive="active">Municipio</a>
         </li>
       }
+
+      @if (hasDepartamentoRole) {
+        <li>
+          <a routerLink="/departamento" routerLinkActive="active">Departamento</a>
+        </li>
+      }
     </ul>
   </nav>
 

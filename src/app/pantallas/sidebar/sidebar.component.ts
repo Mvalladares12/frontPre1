@@ -15,21 +15,19 @@ import Keycloak from 'keycloak-js';
 export class SidebarComponent implements OnInit {
   private keycloakService = inject(Keycloak);
 
-  // Variable para controlar la visibilidad en el HTML
+  // Variables para controlar la visibilidad en el HTML
   hasMunicipioRole = false;
+  hasDepartamentoRole = false;
 
   async ngOnInit() {
 
     if (await this.keycloakService.authenticated) {
 
-      // Consultamos a Keycloak si el usuario tiene el rol 'municipio'
-      // Nota: Si 'municipio' es un rol de cliente (y no de reino),
-      // debes pasar el nombre de tu cliente como segundo parámetro:
-      // this.keycloakService.isUserInRole('municipio', 'front-app2')
-
       this.hasMunicipioRole = this.keycloakService.hasRealmRole('municipio');
+      this.hasDepartamentoRole = this.keycloakService.hasRealmRole('departamento');
 
       console.log('Permiso de Municipio en UI:', this.hasMunicipioRole);
+      console.log('Permiso de Departamento en UI:', this.hasDepartamentoRole);
     }
   }
 
