@@ -54,14 +54,11 @@
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element">
           <div class="acciones-container">
-            <button *kaHasRoles="['ver']" mat-icon-button color="primary"
-                    (click)="verDetalles(element)"
-                    matTooltip="Ver detalles"
-                    matTooltipPosition="above"
-                    aria-label="Ver detalles">
+            <button *kaHasRoles="['ver']" mat-icon-button color="primary" (click)="verDetalles(element)"
+              matTooltip="Ver detalles" matTooltipPosition="above" aria-label="Ver detalles">
               <mat-icon>visibility</mat-icon>
             </button>
-            <button *kaHasRoles="['editar_departamento']; resource: 'front-app'" mat-icon-button color="accent"
+            <button *kaHasRoles="['editar_departamento'];" mat-icon-button color="accent"
                     (click)="editarDepartamento(element)"
                     matTooltip="Editar"
                     matTooltipPosition="above"
