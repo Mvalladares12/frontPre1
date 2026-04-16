@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit {
   // Variables para controlar la visibilidad en el HTML
   hasMunicipioRole = false;
   hasDepartamentoRole = false;
+  hasDistritoRole = false;
 
   async ngOnInit() {
 
@@ -25,9 +26,11 @@ export class SidebarComponent implements OnInit {
 
       this.hasMunicipioRole = this.keycloakService.hasRealmRole('municipio');
       this.hasDepartamentoRole = this.keycloakService.hasRealmRole('departamento');
+      this.hasDistritoRole = this.keycloakService.hasRealmRole('distrito');
 
       console.log('Permiso de Municipio en UI:', this.hasMunicipioRole);
       console.log('Permiso de Departamento en UI:', this.hasDepartamentoRole);
+      console.log('Permiso de Distrito en UI:', this.hasDistritoRole);
     }
   }
 

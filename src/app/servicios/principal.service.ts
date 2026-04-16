@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Municipio} from '../modelos/principal';
 import {Departamento} from '../modelos/departamento';
+import {Distrito} from '../modelos/distrito';
 import {environment} from '../../environment/environment';
 
 @Injectable({
@@ -20,5 +21,9 @@ export class PrincipalService {
 
   public getDepartamentos():Observable<Departamento[]> {
     return this.http.get<Departamento[]>(`${environment.apiUrl}/departamento`);
+  }
+
+  public getDistritos():Observable<Distrito[]> {
+    return this.http.get<Distrito[]>(`${environment.apiUrl}/distrito`);
   }
 }
