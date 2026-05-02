@@ -1,13 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PrincipalService} from '../../servicios/principal.service';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef, MatNoDataRow, MatRow, MatRowDef,
-  MatTable, MatTableDataSource, MatTableModule
+import {PrincipalService} from '../../../servicios/principal.service';
+import { MatTableDataSource, MatTableModule
 } from '@angular/material/table';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatFormField, MatInputModule, MatLabel} from '@angular/material/input';
@@ -15,14 +8,15 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatChip, MatChipSet, MatChipsModule} from '@angular/material/chips';
 import {CommonModule, NgForOf} from '@angular/common';
 import {MatTooltip, MatTooltipModule} from '@angular/material/tooltip';
-import {MatIconButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {Distrito, Municipio} from '../../modelos/principal';
-import {HasRolesDirective} from 'keycloak-angular';
+import {Distrito, Municipio} from '../../../modelos/principal';
+import {TieneRolDirective} from '../../../core/directive/appTieneRol';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-principal',
+  selector: 'app-municipio',
   imports: [
     CommonModule,
     MatTableModule,
@@ -34,13 +28,15 @@ import {HasRolesDirective} from 'keycloak-angular';
     MatChipsModule,
     MatTooltipModule,
     MatIconButton,
-    HasRolesDirective
+    TieneRolDirective,
+    MatButton
   ],
-  templateUrl: './principal.component.html',
+  templateUrl: './municipio.component.html',
   standalone: true,
-  styleUrl: './principal.component.css'
+  styleUrl: './municipio.component.css'
 })
-export class PrincipalComponent implements OnInit {
+
+export class MunicipioComponent implements OnInit {
   displayedColumns: string[] = ['id', 'codigo', 'nombre', 'idDepartamento', 'distritos', 'acciones'];
   dataSource: MatTableDataSource<Municipio>;
 
@@ -48,7 +44,8 @@ export class PrincipalComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   data: any;
 
-  constructor(private principalService: PrincipalService) {
+  constructor(private principalService: PrincipalService,
+              private route: Router,) {
     this.dataSource = new MatTableDataSource<Municipio>([]);
   }
   ngOnInit(): void {
@@ -72,7 +69,7 @@ export class PrincipalComponent implements OnInit {
 
     // Configurar filtro personalizado
     this.dataSource.filterPredicate = (data: Municipio, filter: string) => {
-      const searchStr = (data.nombre + data.codigo + data.idDepartamento).toLowerCase();
+      const searchStr = (data.nombre + data.codigo + data.idDepartam).toLowerCase();
       return searchStr.includes(filter.toLowerCase());
     };
   }
@@ -103,12 +100,14 @@ export class PrincipalComponent implements OnInit {
   }
 
   editarMunicipio(municipio: Municipio) {
-    console.log('Editar:', municipio);
-    // Aquí puedes implementar la lógica para editar
+    localStorage.setItem('accion','actualizar');
+    this.route.navigate(['/municipio/mantenimiento/'+municipio.id]);
   }
 
   eliminarMunicipio(municipio: Municipio) {
-    console.log('Eliminar:', municipio);
-    // Aquí puedes implementar la lógica para eliminar
+  }
+
+  crearMunicipio() {
+    this.route.navigate(['/municipio/mantenimiento','nuevo']);
   }
 }

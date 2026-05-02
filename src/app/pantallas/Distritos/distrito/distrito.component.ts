@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PrincipalService} from '../../servicios/principal.service';
+import {PrincipalService} from '../../../servicios/principal.service';
 import {
   MatTableDataSource, MatTableModule
 } from '@angular/material/table';
@@ -9,14 +9,16 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatChipsModule} from '@angular/material/chips';
 import {CommonModule} from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatIconButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {Departamento, MunicipioDepartamento} from '../../modelos/departamento';
+import {Distrito} from '../../../modelos/distrito';
 import {HasRolesDirective} from 'keycloak-angular';
+import {TieneRolDirective} from "../../../core/directive/appTieneRol";
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-departamento',
+  selector: 'app-distrito',
   imports: [
     CommonModule,
     MatTableModule,
@@ -28,34 +30,37 @@ import {HasRolesDirective} from 'keycloak-angular';
     MatChipsModule,
     MatTooltipModule,
     MatIconButton,
-    HasRolesDirective
+    HasRolesDirective,
+    TieneRolDirective,
+    MatButton
   ],
-  templateUrl: './departamento.component.html',
+  templateUrl: './distrito.component.html',
   standalone: true,
-  styleUrl: './departamento.component.css'
+  styleUrl: './distrito.component.css'
 })
-export class DepartamentoComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'codigo', 'nombre', 'municipios', 'acciones'];
-  dataSource: MatTableDataSource<Departamento>;
+export class DistritoComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'codigo', 'nombre', 'idMunicipio', 'acciones'];
+  dataSource: MatTableDataSource<Distrito>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private principalService: PrincipalService) {
-    this.dataSource = new MatTableDataSource<Departamento>([]);
+  constructor(private principalService: PrincipalService,
+              private route: Router,) {
+    this.dataSource = new MatTableDataSource<Distrito>([]);
   }
 
   ngOnInit(): void {
-    this.cargarDepartamentos();
+    this.cargarDistritos();
   }
 
-  cargarDepartamentos(): void {
-    this.principalService.getDepartamentos().subscribe({
+  cargarDistritos(): void {
+    this.principalService.getDistritos().subscribe({
       next: (data) => {
         this.dataSource.data = data;
       },
       error: (error) => {
-        console.error('Error cargando departamentos:', error);
+        console.error('Error cargando distritos:', error);
       }
     });
   }
@@ -64,9 +69,8 @@ export class DepartamentoComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    // Configurar filtro personalizado
-    this.dataSource.filterPredicate = (data: Departamento, filter: string) => {
-      const searchStr = (data.nombre + data.codigo).toLowerCase();
+    this.dataSource.filterPredicate = (data: Distrito, filter: string) => {
+      const searchStr = (data.nombre + data.codigo + data.idMunicipio).toLowerCase();
       return searchStr.includes(filter.toLowerCase());
     };
   }
@@ -80,23 +84,19 @@ export class DepartamentoComponent implements OnInit {
     }
   }
 
-  getMunicipiosNombres(municipios: MunicipioDepartamento[]): string {
-    return municipios.map(m => m.nombre).join(', ');
+  verDetalles(distrito: Distrito) {
+    console.log('Ver detalles:', distrito);
   }
 
-  getMunicipiosCount(municipios: MunicipioDepartamento[]): number {
-    return municipios.length;
+  editarDistrito(distrito: Distrito) {
+    this.route.navigate(['/distrito/mantenimiento',distrito.id]);
   }
 
-  verDetalles(departamento: Departamento) {
-    console.log('Ver detalles:', departamento);
+  eliminarDistrito(distrito: Distrito) {
+    console.log('Eliminar:', distrito);
   }
 
-  editarDepartamento(departamento: Departamento) {
-    console.log('Editar:', departamento);
-  }
-
-  eliminarDepartamento(departamento: Departamento) {
-    console.log('Eliminar:', departamento);
+  crearDistrito() {
+    this.route.navigate(['/distrito/mantenimiento','nuevo']);
   }
 }

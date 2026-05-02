@@ -12,16 +12,43 @@ export const routes: Routes = [
   {
     path: 'municipio',
     canActivate: [authGuard],
-    loadComponent: () => import('./pantallas/principal/principal.component').then(m => m.PrincipalComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pantallas/Municipios/municipio/municipio.component').then(m => m.MunicipioComponent),
+      },
+      {
+        path: 'mantenimiento/:id',
+        loadComponent: () => import('./pantallas/Municipios/municipio-mantenimiento/municipio-mantenimiento.component').then(m => m.MunicipioMantenimientoComponent),
+      }
+    ]
   },
   {
     path: 'departamento',
     canActivate: [departamentoGuard],
-    loadComponent: () => import('./pantallas/departamento/departamento.component').then(m => m.DepartamentoComponent),
-  },
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pantallas/Departamentos/departamento/departamento.component').then(m => m.DepartamentoComponent),
+      },
+      {
+        path: 'mantenimiento/:id',
+        loadComponent: () => import('./pantallas/Departamentos/departamento-mantenimiento/departamento-mantenimiento.component').then(m => m.DepartamentoMantenimientoComponent),
+      }
+    ]
+   },
   {
     path: 'distrito',
     canActivate: [distritoGuard],
-    loadComponent: () => import('./pantallas/distrito/distrito.component').then(m => m.DistritoComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pantallas/Distritos/distrito/distrito.component').then(m => m.DistritoComponent),
+      },
+      {
+        path: 'mantenimiento/:id',
+        loadComponent: () => import('./pantallas/Distritos/distrito-mantenimiento/distrito-mantenimiento.component').then(m => m.DistritoMantenimientoComponent),
+      }
+    ]
   },
 ];

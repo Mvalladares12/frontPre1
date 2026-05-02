@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="header-actions">
+    <button mat-icon-button (click)="volver()" matTooltip="Volver a la lista">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ isEditMode ? 'Actualizar Distrito' : 'Nuevo Distrito' }}</h2>
+  </div>
+
+  <mat-card class="form-card" *ngIf="!isLoading; else loadingTemplate">
+    <mat-card-content>
+      <form [formGroup]="distritoForm" (ngSubmit)="guardar()" class="mantenimiento-form">
+
+        <div class="form-row">
+          <!-- Select de Municipio -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Municipio al que pertenece</mat-label>
+            <mat-select formControlName="idMunicipio">
+              <mat-option *ngFor="let municipio of municipios" [value]="municipio.id">
+                {{ municipio.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="distritoForm.get('idMunicipio')?.hasError('required')">
+              El municipio es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <!-- Input de Código -->
+          <mat-form-field appearance="outline" class="form-field half-width">
+            <mat-label>Código</mat-label>
+            <input matInput formControlName="codigo" placeholder="Ej: 13" autocomplete="off">
+            <mat-error *ngIf="distritoForm.get('codigo')?.hasError('required')">
+              El código es requerido
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Input de Nombre -->
+          <mat-form-field appearance="outline" class="form-field half-width">
+            <mat-label>Nombre del Distrito</mat-label>
+            <input matInput formControlName="nombre" placeholder="Ej: San Ignacio" autocomplete="off">
+            <mat-error *ngIf="distritoForm.get('nombre')?.hasError('required')">
+              El nombre es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Acciones del formulario -->
+        <div class="form-actions">
+          <button mat-stroked-button type="button" (click)="volver()">
+            Cancelar
+          </button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="distritoForm.invalid || isLoading">
+            <mat-icon>{{ isEditMode ? 'save' : 'add' }}</mat-icon>
+            {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Spinner de carga -->
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Cargando distrito...</p>
+    </div>
+  </ng-template>
+</div>

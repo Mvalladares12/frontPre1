@@ -12,7 +12,6 @@ const isAccessAllowed = async (
   const router = inject(Router);
 
   if (!authenticated) {
-    console.log('🔄 Sesión no detectada. Redirigiendo a Keycloak...');
     await keycloak.login({
       redirectUri: window.location.origin + state.url
     });
@@ -22,11 +21,9 @@ const isAccessAllowed = async (
   const hasDistritoRole = keycloak.hasRealmRole('distrito');
 
   if (!hasDistritoRole) {
-    console.warn('⛔ Acceso denegado: se requiere el rol "distrito".');
     return router.createUrlTree(['/']);
   }
 
-  console.log('✅ Acceso permitido con rol "distrito".');
   return true;
 };
 

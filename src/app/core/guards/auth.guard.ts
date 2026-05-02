@@ -9,7 +9,6 @@ const isAccessAllowed = async (
 
   const { authenticated, keycloak, grantedRoles } = authData;
 
-  console.log('🛡️ ¿Está autenticado?:', authenticated);
 
   if (!authenticated) {
     console.log('🔄 Sesión no detectada. Redirigiendo a Keycloak...');
@@ -18,8 +17,6 @@ const isAccessAllowed = async (
     });
     return false;
   }
-
-  console.log('✅ Token válido. Permisos del usuario:', grantedRoles);
   return true;
 };
 

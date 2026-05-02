@@ -9,6 +9,6 @@ export interface Municipio {
   id: number;
   codigo: string;
   nombre: string;
-  idDepartamento: number;
+  idDepartam: number;
   distritos: Distrito[];
 }

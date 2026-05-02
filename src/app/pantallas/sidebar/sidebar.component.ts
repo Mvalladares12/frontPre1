@@ -22,15 +22,11 @@ export class SidebarComponent implements OnInit {
 
   async ngOnInit() {
 
-    if (await this.keycloakService.authenticated) {
+    if (this.keycloakService.authenticated) {
 
       this.hasMunicipioRole = this.keycloakService.hasRealmRole('municipio');
       this.hasDepartamentoRole = this.keycloakService.hasRealmRole('departamento');
       this.hasDistritoRole = this.keycloakService.hasRealmRole('distrito');
-
-      console.log('Permiso de Municipio en UI:', this.hasMunicipioRole);
-      console.log('Permiso de Departamento en UI:', this.hasDepartamentoRole);
-      console.log('Permiso de Distrito en UI:', this.hasDistritoRole);
     }
   }
 

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="header-actions">
+    <button mat-icon-button (click)="volver()" matTooltip="Volver a la lista">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ isEditMode ? 'Actualizar Departamento' : 'Nuevo Departamento' }}</h2>
+  </div>
+
+  <mat-card class="form-card" *ngIf="!isLoading; else loadingTemplate">
+    <mat-card-content>
+      <form [formGroup]="departamentoForm" (ngSubmit)="guardar()" class="mantenimiento-form">
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field codigo-width">
+            <mat-label>Código</mat-label>
+            <input matInput formControlName="codigo" placeholder="Ej: 13" autocomplete="off">
+            <mat-error *ngIf="departamentoForm.get('codigo')?.hasError('required')">
+              El código es requerido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field nombre-width">
+            <mat-label>Nombre del Departamento</mat-label>
+            <input matInput formControlName="nombre" placeholder="Ej: San Miguel" autocomplete="off">
+            <mat-error *ngIf="departamentoForm.get('nombre')?.hasError('required')">
+              El nombre es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button mat-stroked-button type="button" (click)="volver()">
+            Cancelar
+          </button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="departamentoForm.invalid || isLoading">
+            <mat-icon>{{ isEditMode ? 'save' : 'add' }}</mat-icon>
+            {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Cargando departamento...</p>
+    </div>
+  </ng-template>
+</div>
