@@ -10,7 +10,7 @@ console.log('¿KEYCLOAK_URL detectada en el servidor?:', process.env.KEYCLOAK_UR
 const apiUrl = process.env.API_URL || 'http://localhost:8084';
 const keycloakUrl = process.env.KEYCLOAK_URL || 'http://localhost:8180';
 const keycloakRealm = process.env.KEYCLOAK_REALM || 'seguridad-app';
-const keycloakClient = process.env.KEYCLOAK_CLIENT || 'front-app2';
+const keycloakClient = process.env.KEYCLOAK_CLIENT || 'front-app';
 
 const envConfigFile = `
 export const environment = {

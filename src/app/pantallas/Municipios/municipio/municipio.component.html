@@ -2,7 +2,7 @@
   <div class="page-header">
     <h2>Lista de Municipios</h2>
 
-    <button *appTieneRol="['crear_municipio', 'front-app2']"
+    <button *appTieneRol="['crear_municipio', 'front-app']"
             mat-flat-button
             color="primary"
             (click)="crearMunicipio()">
@@ -63,14 +63,14 @@
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element">
           <div class="acciones-container">
-            <button *appTieneRol="['actualizar_municipio', 'front-app2']" mat-icon-button color="accent"
+            <button *appTieneRol="['actualizar_municipio', 'front-app']" mat-icon-button color="accent"
                     (click)="editarMunicipio(element)"
                     matTooltip="Editar"
                     matTooltipPosition="above"
                     aria-label="Editar">
               <mat-icon>edit</mat-icon>
             </button>
-            <button *appTieneRol="['borrar_municipio', 'front-app2']" mat-icon-button color="warn"
+            <button *appTieneRol="['borrar_municipio', 'front-app']" mat-icon-button color="warn"
                     (click)="eliminarMunicipio(element)"
                     matTooltip="Eliminar"
                     matTooltipPosition="above"

@@ -3,7 +3,7 @@
   <div class="page-header">
     <h2>Lista de Distritos</h2>
 
-    <button *appTieneRol="['crear_distrito', 'front-app2']"
+    <button *appTieneRol="['crear_distrito', 'front-app']"
             mat-flat-button
             color="primary"
             (click)="crearDistrito()">
@@ -56,14 +56,14 @@
                     aria-label="Ver detalles">
               <mat-icon>visibility</mat-icon>
             </button>
-            <button *appTieneRol="['actualizar_distrito', 'front-app2']" mat-icon-button color="accent"
+            <button *appTieneRol="['actualizar_distrito', 'front-app']" mat-icon-button color="accent"
                     (click)="editarDistrito(element)"
                     matTooltip="Editar"
                     matTooltipPosition="above"
                     aria-label="Editar">
               <mat-icon>edit</mat-icon>
             </button>
-            <button *appTieneRol="['borrar_distrito', 'front-app2']" mat-icon-button color="warn"
+            <button *appTieneRol="['borrar_distrito', 'front-app']" mat-icon-button color="warn"
                     (click)="eliminarDistrito(element)"
                     matTooltip="Eliminar"
                     matTooltipPosition="above"

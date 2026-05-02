@@ -3,7 +3,7 @@
   <div class="page-header">
     <h2>Lista de Departamentos</h2>
 
-    <button *appTieneRol="['crear_departamento', 'front-app2']"
+    <button *appTieneRol="['crear_departamento', 'front-app']"
             mat-flat-button
             color="primary"
             (click)="crearDepartamento()">
@@ -42,14 +42,14 @@
               matTooltip="Ver detalles" matTooltipPosition="above" aria-label="Ver detalles">
               <mat-icon>visibility</mat-icon>
             </button>
-            <button *appTieneRol="['actualizar_departamento', 'front-app2']" mat-icon-button color="accent"
+            <button *appTieneRol="['actualizar_departamento', 'front-app']" mat-icon-button color="accent"
                     (click)="editarDepartamento(element)"
                     matTooltip="Editar"
                     matTooltipPosition="above"
                     aria-label="Editar">
               <mat-icon>edit</mat-icon>
             </button>
-            <button *appTieneRol="['borrar_departamento', 'front-app2']" mat-icon-button color="warn"
+            <button *appTieneRol="['borrar_departamento', 'front-app']" mat-icon-button color="warn"
                     (click)="eliminarDepartamento(element)"
                     matTooltip="Eliminar"
                     matTooltipPosition="above"
